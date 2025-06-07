@@ -14,10 +14,10 @@ class CategoriaController {
 
   async create(req, res) {
     try {
-      const id = uuidv4().substring(0, 10);
-      const { nombre } = req.body;
+      const id_categoria = uuidv4().substring(0, 5);
+      const categoria = req.body;
 
-      const nuevaCategoria = await Categoria.create(id, nombre);
+      const nuevaCategoria = await Categoria.create({ ...categoria, id_categoria });
       return res.status(201).json(nuevaCategoria);
     } catch (err) {
       console.error(err);

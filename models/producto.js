@@ -20,16 +20,12 @@ const Producto = sequelize.define("Producto", {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
-    img: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-    },
-    id_categoria: DataTypes.STRING(5),
-
+    id_categoria: {
+       type: DataTypes.STRING(5),
+       allowNull: true,
+    }
 },{
     tableName: "producto",
 })
-
-// Definir asociaciones
 
 export default Producto;

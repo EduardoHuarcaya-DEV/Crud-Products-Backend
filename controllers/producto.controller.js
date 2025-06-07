@@ -1,4 +1,5 @@
 import Producto from "../models/producto.js";
+import { v4 as uuidv4 } from "uuid";
 
 class ProductoController {
   async getAll(req, res) {
@@ -13,8 +14,9 @@ class ProductoController {
 
   async create(req, res) {
     try {
+      const id_producto = uuidv4().substring(0, 10);
       const producto = req.body;
-      const nuevoProducto = await Producto.create(producto);
+      const nuevoProducto = await Producto.create({ ...producto, id_producto });
       return res.status(201).json(nuevoProducto);
     } catch (err) {
       console.error(err);
@@ -25,7 +27,7 @@ class ProductoController {
   async update(req, res) {
     try {
       const { id } = req.params;
-      const { nombre, descripcion, precio, img, id_categoria } = req.body;
+      const { nombre, descripcion, precio, id_categoria } = req.body;
 
       const producto = await Producto.findByPk(id);
 
@@ -35,11 +37,10 @@ class ProductoController {
       }
 
       // Si el producto fue encontrado se procede con la actualizacion
-      await Producto.update({
+      await producto.update({
         nombre,
         descripcion,
         precio,
-        img,
         id_categoria,
       });
 
@@ -52,7 +53,7 @@ class ProductoController {
 
   async delete(req, res) {
     try {
-      const id = req.params;
+      const { id } = req.params;
 
       const producto = await Producto.findByPk(id);
 
