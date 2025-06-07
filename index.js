@@ -14,12 +14,15 @@ app.use(express.json());
 
 // Importar Rutas
 
+import UsuarioRoute from "./routes/usuario.route.js";
 import ProductoRoutes from "./routes/producto.route.js"; 
 import CategoriaRoutes from "./routes/categoria.route.js";
 import ImagenProductoRoutes from "./routes/imagen_producto.route.js";
 
+
 // Rutas
 
+app.use("/api/usuario", UsuarioRoute);
 app.use("/api/producto", ProductoRoutes);
 app.use("/api/categoria", CategoriaRoutes);
 app.use("/api/imagen_producto", ImagenProductoRoutes);
