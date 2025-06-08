@@ -8,12 +8,14 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 
+// Middlewares
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 
 // Importar Rutas
 
+import authMiddleware from "./middleware/authMiddleware.js";
 import UsuarioRoute from "./routes/usuario.route.js";
 import ProductoRoutes from "./routes/producto.route.js"; 
 import CategoriaRoutes from "./routes/categoria.route.js";
@@ -21,6 +23,7 @@ import ImagenProductoRoutes from "./routes/imagen_producto.route.js";
 
 
 // Rutas
+app.use(authMiddleware);
 
 app.use("/api/usuario", UsuarioRoute);
 app.use("/api/producto", ProductoRoutes);
