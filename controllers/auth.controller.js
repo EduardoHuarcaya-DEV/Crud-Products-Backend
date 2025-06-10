@@ -1,5 +1,6 @@
 import Usuario from "../models/usuario.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 class AuthController {
   async login(req, res) {
@@ -33,7 +34,7 @@ class AuthController {
       return res.status(200).json({
         message: "Inicio de sesión exitoso",
         token,
-        usuario: payload,
+        usuario: payload
       });
     } catch (err) {
       console.error(err);

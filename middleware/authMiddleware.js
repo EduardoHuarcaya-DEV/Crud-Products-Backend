@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 const SECRET_KEY = process.env.JWT_SECRET || "secret_shh_dev";
-const publicPaths = ["/api/login"];
+const publicPaths = ["/api/auth/login"];
 
 const authMiddleware = (req, res, next) => {
   if (publicPaths.includes(req.path)) {
